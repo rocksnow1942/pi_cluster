@@ -8,8 +8,9 @@ import (
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Received request from", r.RemoteAddr)
-		fmt.Fprint(w, "Hello, World!\n")
+		// echo back the reqeust url
+		fmt.Fprint(w, "Hello, World!\n"+r.URL.EscapedFragment())
 	})
-	fmt.Println("Starting server on port 80")
+	fmt.Println("Started server on port 80!!")
 	http.ListenAndServe(":80", nil)
 }
