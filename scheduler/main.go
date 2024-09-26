@@ -10,5 +10,6 @@ func main() {
 		fmt.Println("Received request from", r.RemoteAddr)
 		fmt.Fprint(w, "Hello, World!\n")
 	})
+	fmt.Println("Starting server on port 80")
 	http.ListenAndServe(":80", nil)
 }
