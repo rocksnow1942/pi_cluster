@@ -12,4 +12,4 @@ push:
 
 .PHONY: prune
 prune:
-	podman image prune -a -f
+	podman image prune -f
