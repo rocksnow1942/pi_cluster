@@ -58,11 +58,19 @@ periodically. The backup can be used to restore the SD card in case of failure.
    0 4 * * 4 image-backup /mnt/bckup1/pi4s_bck_Thu.img
    0 4 * * 5 image-backup /mnt/bckup1/pi4s_bck_Fri.img
    0 4 * * 6 image-backup /mnt/bckup1/pi4s_bck_Sat.img
-   0 4 * * 6 image-backup /mnt/bckup1/pi4s_bck_Sat.img
    0 3 1 * * image-backup /mnt/bckup1/pi4s_bck_Monthly.img
    ```
 
 #### Restore
+
+To restore the boot SD card from the backup image, flush the image to the SD card using
+`balenaEtcher` or `dd`.
+
+Using `dd`:
+
+```sh
+sudo dd if=/mnt/bckup1/pi4s_bck_1.img of=/dev/sda1
+```
 
 ### References
 
