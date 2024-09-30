@@ -78,7 +78,7 @@ mount -a
 # check disk usage
 df -h
 
-# check disk usage (better output)
+# check disk usage (better output, ncdu = NCurses Disk Usage)
 sudo ncdu /
 ```
 
