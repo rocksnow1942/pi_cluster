@@ -72,6 +72,34 @@ Using `dd`:
 sudo dd if=/mnt/bckup1/pi4s_bck_1.img of=/dev/sda1
 ```
 
+#### Trouble Shooting
+
+1. When try to boot from a new SD card flashed with back image, boot failed due
+   to `PARTUUID=xxxx does not exist`.
+   This is because the `/etc/fstab` uses PARTUUID to identify the boot partition.
+   However during first boot from a shrinked image, the autoexpansion script
+   (`/usr/lib/raspi-config/init_resize.sh`) will randomize the PARTUUID (`fix_partuuid`).
+
+   For whatever reason, the in some cases, the `fix_partuuid` changed the disk UUID
+   but failed to sed the `/etc/fstab` and `/boot/cmdline.txt` to the new UUID.
+   In somme other cases, the disk UUID is not changed at all (on my pi4s). It's
+   a mystery why the `fix_partuuid` script behaves differently in these cases.
+
+   To fix this, I changed the the disk UUID to the one listed in cmdline.txt.
+   I did it one another RPi4B, with `fdisk`:
+
+   ```sh
+   sudo fdisk /dev/sdb
+   x
+   i
+   0x<uuid_in_cmdline.txt>
+   r
+   w
+   ```
+
+   Then I can boot from the new SD card.
+
 ### References
 
 1. [How to make live backup of your raspberry Pi](https://nerd-tech.net/2022/09/08/how-to-make-a-live-backup-of-your-raspberry-pi-ubuntu-raspberry-pi-os-server-to-create-live-bootable-iso-images-on-an-external-drive/)
+1. [Why PARTUUID changed?](https://forums.raspberrypi.com/viewtopic.php?t=357331)
