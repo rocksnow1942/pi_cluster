@@ -32,5 +32,20 @@ df -h
 # check fan speed
 cat /sys/devices/platform/cooling_fan/hwmon/*/fan1_input
 # 5431
+```
 
+Test system properties:
+
+```bash
+# test SD card speed
+# https://forums.raspberrypi.com/viewtopic.php?t=31925
+# test write speed:
+sync; echo 3 | sudo tee /proc/sys/vm/drop_caches
+dd if=/dev/zero of=~/test.tmp bs=500K count=1024
+# 524288000 bytes (524 MB, 500 MiB) copied, 27.6649 s, 19.0 MB/s
+
+# test read speed:
+sync; echo 3 | sudo tee /proc/sys/vm/drop_caches
+dd if=~/test.tmp of=/dev/null bs=500K count=1024
+# 524288000 bytes (524 MB, 500 MiB) copied, 6.14367 s, 85.3 MB/s
 ```
