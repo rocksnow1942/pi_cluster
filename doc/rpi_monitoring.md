@@ -32,6 +32,12 @@ df -h
 # check fan speed
 cat /sys/devices/platform/cooling_fan/hwmon/*/fan1_input
 # 5431
+
+# Check S.M.A.R.T. status of the disk
+# first install smartmontools
+sudo apt-get install smartmontools
+# then check the status
+sudo smartctl -a /dev/sda
 ```
 
 Test system properties:

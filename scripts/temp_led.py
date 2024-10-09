@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import glob
 import pathlib
 from time import sleep
@@ -25,13 +27,21 @@ def get_ssd_temperature() -> float:
     return int(temp_file.read_text()) / 1000
 
 
-TEMP_MIN = 30
-TEMP_MAX = 60
+CPU_TEMP_MIN = 50
+CPU_TEMP_MAX = 100
+SSD_TEMP_MIN = 40
+SSD_TEMP_MAX = 100
 
 
-def normalize(temp: float) -> float:
+def normalize_cpu(temp: float) -> float:
     # normalize to 0-1
-    r = (temp - TEMP_MIN) / (TEMP_MAX - TEMP_MIN)
+    r = (temp - CPU_TEMP_MIN) / (CPU_TEMP_MAX - CPU_TEMP_MIN)
+    return max(0, min(1, r))
+
+
+def normalize_ssd(temp: float) -> float:
+    # normalize to 0-1
+    r = (temp - SSD_TEMP_MIN) / (SSD_TEMP_MAX - SSD_TEMP_MIN)
     return max(0, min(1, r))
 
 
@@ -41,9 +51,9 @@ def main() -> None:
         cpu_temp = get_cpu_temperature()
         ssd_temp = get_ssd_temperature()
         print(f"CPU: {cpu_temp}°C, SSD: {ssd_temp}°C")
-        cpu_r = normalize(cpu_temp)
-        ssd_r = normalize(ssd_temp)
-        led.value = min(cpu_r + ssd_r, 1)
+        cpu_r = normalize_cpu(cpu_temp)
+        ssd_r = normalize_ssd(ssd_temp)
+        led.value = (cpu_r + ssd_r) / 2
         sleep(5)
 
 
