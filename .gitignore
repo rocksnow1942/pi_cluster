@@ -23,3 +23,7 @@ go.work.sum
 
 # env file
 .env
+
+# ruff and venv
+.venv
+.*/
