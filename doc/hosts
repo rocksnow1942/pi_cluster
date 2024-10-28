@@ -1,4 +1,8 @@
+# Hosts on netlify DNS server
 pinas.h-kang.com 192.168.86.247
 pi4s.h-kang.com 192.168.86.203
 pi4p.h-kang.com 192.168.86.204
 tp.h-kang.com 192.168.86.201
+
+# Not configured yet
+pi5k.local 192.168.86.205
