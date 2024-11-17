@@ -1,3 +1,4 @@
+// start with `cargo new cli --bin`
 fn main() {
     println!("Hello, world!");
     let a = 10;
