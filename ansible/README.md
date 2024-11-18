@@ -20,3 +20,9 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub user@host`.
 ```bash
 ansible myhosts -m ping -i inventory.yaml
 ```
+
+#### Run playbook
+
+```bash
+ansible-playbook -i inventory.yaml playbook.yaml
+```
