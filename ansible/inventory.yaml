@@ -1,13 +1,17 @@
 myhosts:
   hosts:
-    pi5k:
-      # 192.168.86.205
-      ansible_host: pi5k
     tp:
-      # 192.168.86.201
       ansible_host: tp.h-kang.com
     pinas:
       ansible_host: pinas.h-kang.com
+    pi4s:
+      ansible_host: pi4s.h-kang.com
+    pi4k:
+      ansible_host: pi4k.h-kang.com
+    pi4p:
+      ansible_host: pi4p.h-kang.com
+    pi5k:
+      ansible_host: pi5k.h-kang.com
   vars:
     ansible_user: hui
     ansible_ssh_private_key_file: ~/.ssh/id_ed25519
