@@ -23,3 +23,23 @@ sudo raspi-config
 1. Insert the SD card into your computer.
 2. Open the boot partition of the SD card.
 3. Create a file named `ssh` (no extension) in the root of the boot partition.
+
+## Use SSH Key Authentication
+
+1. Generate an SSH key pair on your local machine (if you don't have one already):
+
+```bash
+ssh-keygen -t rsa -b 4096
+```
+
+2. Copy the public key to the Raspberry Pi:
+
+```bash
+ssh-copy-id pi@<raspberry_pi_ip>
+```
+
+3. Test the SSH connection:
+
+```bash
+ssh pi@<raspberry_pi_ip>
+```
